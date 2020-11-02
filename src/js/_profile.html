@@ -3,6 +3,10 @@
   /** Renders an illustrator if it exists and is not the same as the author. */
 %>
 
+<ul class="book-nav">
+  <li class="list"><a href="#<%= data.back %>">back to list</a></li>
+</ul>
+
 <div>
   <h2 class="title">Profile <%= data.user.displayName %></h2>
   <div class="author">Email: <%= data.user.email %></div>

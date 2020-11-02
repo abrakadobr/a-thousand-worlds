@@ -1,4 +1,4 @@
-const { firebase, auth, uiConfig } = require('./firebase')
+const { firebase, uiConfig } = require('./firebase')
 const { send } = require('./pubsub')
 
 let currentUser = null
@@ -14,9 +14,12 @@ firebase.auth().onAuthStateChanged(function(user) {
     u.isAnonymous = user.isAnonymous;
     u.uid = user.uid;
     u.providerData = user.providerData;
-    currentUser = u
-    //console.log('send auth-user',currentUser)
-    send('auth-user',currentUser)
+    firebase.database().ref(`profile/${u.uid}`).once('value').then(snap=>{
+      u.profile = snap.toJSON()
+      currentUser = u
+      send('auth-user',currentUser)
+    })
+
   } else {
     currentUser = null
     //console.log('send auth-user',currentUser)
@@ -34,7 +37,19 @@ function hasRole(role)
 {
 }
 
+function signOut()
+{
+  firebase.auth().signOut()
+}
+
+function signIn(el)
+{
+  firebase.ui.start('#firebase-auth-window', uiConfig)
+}
+
 module.exports = {
   getUser,
-  hasRole
+  hasRole,
+  signIn,
+  signOut
 }

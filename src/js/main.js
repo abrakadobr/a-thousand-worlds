@@ -74,6 +74,8 @@ channel.on("hashchange", async function(params, pastParams = {}) {
     let u = authService.getUser()
 
     console.log('profile view',u)
+    if (!u)
+      return
     //console.log(firebase.user)
     track("profile", u.uid);
     var back = hash.serialize({
@@ -174,17 +176,16 @@ if (startup.year || startup.tags) {
 }
 $.one('#btn-auth-login').onclick = (e)=>{
   //console.log(e)
+  authService.signIn('#firebase-auth-window')
   e.preventDefault()
-  firebase.ui.start('#firebase-auth-window', uiConfig)
 }
 
 
 $.one('#btn-auth-logout').onclick = (e)=>{
   e.preventDefault()
-  auth.signOut()
+  authService.signOut()
 }
 
-  console.log('bind auth-user')
 channel.on("auth-user", function(user) {
   console.log('on auth-user')
   if (user)

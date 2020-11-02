@@ -67,6 +67,32 @@
     a { font-weight: bold; }
   }
 
+  .book-nav {
+    list-style-type: none;
+    margin: 0 0 33px 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+
+    li { margin: 0; }
+
+    a {
+      .buttonBase();
+      border-color: var(--accent);
+      color: var(--header);
+
+      &:hover, &:focus {
+        background: var(--accent);
+        color: white;
+        opacity: 0.8;
+      }
+    }
+
+    .list { flex-grow: 2; }
+    .next { margin-left: 11px; }
+  }
+
+
 
 }
 
