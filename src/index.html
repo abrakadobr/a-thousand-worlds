@@ -27,8 +27,12 @@
       </p>
 
       <p class="about-link">
+        <a id="btn-auth-login" href="#login">Log In</a>
+        <a id="btn-auth-logout" href="#logout">Log Out</a>
+        <a id="btn-auth-profile" href="#profile=1">Profile</a>
         <a href="about.html">About</a>
       </p>
+      <div id="firebase-auth-window"></div>
 
       <!-- <h3>Filters</h3> -->
       <fieldset class="years" aria-label="Select a year">
@@ -95,6 +99,7 @@
       </section>
 
       <div class="book-detail"></div>
+      <div class="auth-profile"></div>
     </main>
 
     <%= t.include("partials/_footer.html", { content: t.include("_footer.html"), project: grunt.data.json.project }) %>

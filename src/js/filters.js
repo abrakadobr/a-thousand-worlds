@@ -41,7 +41,8 @@ var setFilters = function(state) {
   }
 
   if (view) {
-    $.one(`.view-controls input[value="${view}"]`).checked = true;
+    if ($.one(`.view-controls input[value="${view}"]`) )
+      $.one(`.view-controls input[value="${view}"]`).checked = true;
   }
 
   return state;

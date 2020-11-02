@@ -4,14 +4,17 @@ var dot = require("./lib/dot");
 var track = require("./lib/tracking");
 require("./lazyLoading");
 
+//var { firebase, uiConfig, auth } = require('./firebase')
 var channel = require("./pubsub");
+var authService = require('./authService')
 var bookService = require("./bookService");
 var {
   renderBook,
   renderList,
   renderCovers,
   createCover,
-  filterBooks
+  filterBooks,
+  renderProfile
 } = require("./catalog");
 var { getFilters, setFilters, enableFilters } = require("./filters");
 
@@ -58,11 +61,32 @@ channel.on("hashchange", async function(params, pastParams = {}) {
   var existing = getFilters();
   // hash params override existing filters override defaults
   var merged = Object.assign({}, defaults, existing, params);
+  console.log('hashchange merged',merged)
   bodyData.mode = merged.view;
   bodyData.year = merged.year;
   bodyData.tags = (merged.tags || []).length;
+  //console.log('hashchange bodyData',bodyData)
 
   setFilters(merged);
+  // profile rendering
+  if (merged.profile)
+  {
+    let u = authService.getUser()
+
+    console.log('profile view',u)
+    //console.log(firebase.user)
+    track("profile", u.uid);
+    var back = hash.serialize({
+      year: merged.year,
+      view: merged.view,
+      tags: merged.tags.sort(compareTags),
+      reset: !pastParams.year // don't restore focus if this is the starting view
+    });
+    enableFilters(false);
+    renderProfile({ back, user: u });
+    //renderProfile({ book, next, previous, back, hash, reviewer });
+    return
+  }
 
   // single book rendering
   if (merged.book) {
@@ -101,6 +125,7 @@ channel.on("hashchange", async function(params, pastParams = {}) {
     renderBook({ book, next, previous, back, hash, reviewer });
     document.body.setAttribute("data-mode", "book");
   } else {
+    console.log('where we go?')
     // filtered view rendering
     document.body.classList.add("loading");
     // disable filtering during load to prevent spamming
@@ -147,6 +172,32 @@ if (startup.year || startup.tags) {
   var filter = getFilters();
   hash.replace(filter);
 }
+$.one('#btn-auth-login').onclick = (e)=>{
+  //console.log(e)
+  e.preventDefault()
+  firebase.ui.start('#firebase-auth-window', uiConfig)
+}
+
+
+$.one('#btn-auth-logout').onclick = (e)=>{
+  e.preventDefault()
+  auth.signOut()
+}
+
+  console.log('bind auth-user')
+channel.on("auth-user", function(user) {
+  console.log('on auth-user')
+  if (user)
+  {
+    $.one('#btn-auth-login').style.display = 'none'
+    $.one('#btn-auth-logout').style.display = 'inline'
+    $.one('#btn-auth-profile').style.display = 'inline'
+  } else {
+    $.one('#btn-auth-login').style.display = 'inline'
+    $.one('#btn-auth-logout').style.display = 'none'
+    $.one('#btn-auth-profile').style.display = 'none'
+  }
+})
 
 // filters update the hash
 channel.on("filterchange", function(state) {
