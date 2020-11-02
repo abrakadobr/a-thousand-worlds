@@ -1,0 +1,129 @@
+@tagline-nowrap: ~"(min-width: 688px)";
+
+.hide-below(@width) {
+  @media (max-width: ~"@{width}px") {
+    .hide-below-@{width} { display: none; }
+  }
+}
+
+.hide-above(@width) {
+  @media (min-width: ~"@{width}px") {
+    .hide-above-@{width} { display: none; }
+  }
+}
+
+.about-page {
+  background: @header-2020;
+
+  header.hero {
+    background: @header-2020;
+
+    h1 {
+      font-size: 30px;
+
+      @media @mobile-small-above {
+        font-size: 9.5vw;
+      }
+
+      @media @tagline-nowrap {
+        font-size: 67.5px;
+      }
+    }
+  }
+
+  footer {
+    background: @header-2020;
+    border: none;
+    .npr ul {
+      color: white;
+    }
+  }
+}
+
+main.about {
+  padding: 33px 20px;
+  margin: auto;
+  max-width: 1187px;
+
+  h2 {
+    .gotham();
+    color: #454545;
+    line-height: 1.5;
+    margin: 0 0 .5em 0;
+  }
+
+  p + h2 { margin-top: 1.5em; }
+
+  p, li {
+    .din();
+    font-weight: bold;
+    font-size: 18.5px;
+    margin-bottom: 20px;
+  }
+
+  .about-content {
+    background: @contrast-2020;
+    padding: 25px 50px 1px;
+
+    @media @mobile {
+      padding: 12px 25px 1px;
+    }
+
+  }
+
+  .about-text-highlighted {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .hide-below(1125);
+  .hide-below(1175);
+
+  .credits {
+    border-top: 1px solid #999;
+    padding-top: 3em;
+    margin-top: 3em;
+
+    b {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    ul {
+      margin: 1.5em 0;
+      padding: 0;
+      list-style-type: none;
+
+      li { margin: 0; }
+
+      li + li { margin-top: .3em; }
+    }
+  }
+}
+
+.vertical-triangle(@height, @polygon) {
+
+  background: @contrast-2020;
+  width: 100%;
+  transform: translate(-50%, 0);
+  left: 50%;
+  position: relative;
+  padding-bottom: @height;
+
+  &:after {
+    background: @header-2020;
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding-bottom: 10px;
+    padding-bottom: @height;
+    -webkit-clip-path: @polygon;
+    clip-path: @polygon;
+  }
+}
+
+// there is a weird rendering gap that requires a 2% overlap to the flat side of the polygon
+.triangle-down { .vertical-triangle(28px, polygon(0% -2%, 100% -2%, 50% 100%) ); }
+.triangle-up { .vertical-triangle(28px, polygon(0% 102%, 100% 102%, 50% 0%) ); }

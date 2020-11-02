@@ -1,0 +1,151 @@
+.book-detail {
+  display: none;
+  padding: 0;
+  max-width: 800px;
+
+  @media @desktop-above {
+    max-width: 1000px;
+  }
+
+  @media @mobile-above {
+    padding: 0 40px 20px 40px;
+  }
+
+  [data-mode="book"] & {
+    display: block;
+  }
+
+  h2.title {
+    line-height: 1.3;
+    margin: 0 0 6px 0;
+
+    // programmatic focus only
+    &:focus {
+      outline: none;
+    }
+  }
+
+  p {
+    line-height: 1.5;
+    margin: 0 0 1em 0;
+  }
+
+  .author {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.3;
+
+    @media @mobile-above {
+      font-size: 16px;
+    }
+  }
+
+  .text {
+    font-size: 14px;
+
+    @media @mobile-above {
+      font-size: 16px;
+    }
+  }
+
+  .reviewer {
+    color: #666;
+
+    a { font-weight: bold; }
+  }
+
+  .cover {
+    float: right;
+    margin-left: 11px;
+    margin-bottom: 11px;
+    width: 33%;
+
+    @media @tablet-above {
+      margin-left: 16px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .links {
+    margin: 33px 0 0 1.1em;
+    padding: 0;
+  }
+
+  .book-nav {
+    list-style-type: none;
+    margin: 0 0 33px 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+
+    li { margin: 0; }
+
+    a {
+      .buttonBase();
+      border-color: var(--accent);
+      color: var(--header);
+
+      &:hover, &:focus {
+        background: var(--accent);
+        color: white;
+        opacity: 0.8;
+      }
+    }
+
+    .list { flex-grow: 2; }
+    .next { margin-left: 11px; }
+  }
+
+  .tags {
+    .gotham();
+    list-style-type: none;
+    margin: 20px 0 15px 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin: 0 3px 3px 0;
+
+      a {
+        .buttonBase();
+        background: var(--accent);
+        color: white;
+
+        &:hover, &:focus {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  .get-this-book {
+    list-style-type: none;
+    margin: 33px 0 0 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin: 0 3px 3px 0;
+    }
+
+    a {
+      .buttonBase();
+      border-color: var(--accent);
+      color: var(--accent);
+
+      &:hover, &:focus {
+        background: var(--accent);
+        color: white;
+        opacity: 0.8;
+      }
+    }
+
+    svg {
+      height: 1em;
+      width: auto;
+      display: inline-block;
+      align-items: baseline;
+      margin-bottom: -1px;
+    }
+  }
+}

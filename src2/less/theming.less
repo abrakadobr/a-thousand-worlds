@@ -1,0 +1,14 @@
+@header-2020: red;
+@accent-2020: red;
+@accentspin-2020: @magenta;
+@contrast-2020: white;
+
+.setup-year(@year, @accent, @accentspin, @header) {
+  body[data-year="@{year}"] {
+    --accent: @accent;
+    --accent-spin: @accentspin; // darken(saturate(spin(@accent, 60), 5%), 10%);
+    --header: @header;
+  };
+}
+
+.setup-year(2020, @accent-2020, @accentspin-2020, @header-2020);

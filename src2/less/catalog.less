@@ -1,0 +1,148 @@
+.catalog {
+  flex: 1;
+  @corner: 4px;
+  padding-left: 24px;
+
+  @media @mobile {
+    padding-left: 0;
+  }
+
+  [data-mode="profile"] & {
+    display: none;
+  }
+
+  [data-mode="book"] & {
+    display: none;
+  }
+
+  [data-count="0"] &:after {
+    content: "No results found";
+    text-align: center;
+    padding: 40px;
+    display: block;
+  }
+
+  .clear-filters {
+    .buttonBase();
+    border-color: var(--accent);
+    color: var(--accent);
+    background: transparent;
+    cursor: pointer;
+    margin-left: 6px;
+
+    @media @mobile {
+      // we've got our own button on mobile
+      display: none;
+    }
+
+    &:hover, &:focus {
+      background: var(--accent);
+      color: white;
+      opacity: 0.8;
+    }
+
+    [data-tags="0"] & {
+      display: none;
+    }
+
+    svg {
+      height: 1em;
+      width: auto;
+      display: inline-block;
+      margin-left: 6px;
+      float: right;
+    }
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    flex-wrap: wrap;
+
+    @media @mobile-above {
+      flex-wrap: nowrap;
+    }
+
+    h3 {
+      font-size: 14px;
+      line-height: 1.2;
+
+      @media @mobile {
+        margin-bottom: 10px;
+      }
+
+      @media @mobile-above {
+        font-size: 14px;
+      }
+    }
+
+    .view-controls { order: 2; }
+  }
+
+  .view-controls {
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+
+    @media @mobile-above {
+      width: auto;
+      text-align: left;
+      min-width: 150px;
+    }
+
+    svg {
+      vertical-align: middle;
+      height: 1em;
+      width: auto;
+    }
+  }
+
+  input[type="radio"] {
+    .sr-only;
+
+    & + label {
+      display: block;
+      padding: 8px;
+      border: 1px solid @accent;
+      background: white;
+      color: @accent;
+      border-color: var(--accent);
+      color: var(--accent);
+      cursor: pointer;
+
+      @media @mobile {
+        width: 50%;
+      }
+
+      rect {
+        fill: @accent;
+        fill: var(--accent);
+      }
+    }
+
+    &:checked + label {
+      background: @accent;
+      background: var(--accent);
+      color: white;
+
+      rect {
+        fill: white;
+      }
+    }
+
+    &:first-child + label {
+      border-radius: @corner 0 0 @corner;
+    }
+  }
+
+  label:last-child {
+    border-radius: 0 @corner @corner 0;
+  }
+}
+
+@import "covers";
+@import "list";
