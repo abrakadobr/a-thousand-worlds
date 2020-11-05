@@ -1,0 +1,72 @@
+@import 'variables';
+
+.hide-below(@width) {
+  @media (max-width: ~"@{width}px") {
+    .hide-below-@{width} { display: none; }
+  }
+}
+
+.hide-above(@width) {
+  @media (min-width: ~"@{width}px") {
+    .hide-above-@{width} { display: none; }
+  }
+}
+
+// fonts
+
+.din() {
+  font-family: @din;
+}
+
+.gotham() {
+  font-family: @gotham;
+  font-weight: normal;
+  font-weight: 400;
+}
+
+// Normal Knockout
+.knockout() {
+  font-family: @knockout;
+  font-weight: normal;
+}
+
+// Knockout, uppercased
+.knockout-upper() {
+  .knockout();
+  text-transform: uppercase;
+}
+
+// Knockout for headings
+.knockout-header() {
+  .knockout-upper();
+  letter-spacing: 0.05em;
+  -webkit-font-smoothing: antialiased;
+}
+
+// other mixins
+.buttonBase() {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 11px;
+  padding: 5px 6px;
+  text-decoration: none;
+  text-transform: capitalize;
+  white-space: nowrap;
+
+  @media @mobile-above {
+    font-size: 12px;
+  }
+}
+
+// years theming
+
+.setup-year(@year, @accent, @accentspin, @header) {
+  //body[data-year="@{year}"] {
+  body {
+    --accent: @accent;
+    --accent-spin: @accentspin; // darken(saturate(spin(@accent, 60), 5%), 10%);
+    --header: @header;
+  };
+}
+

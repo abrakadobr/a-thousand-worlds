@@ -1,14 +1,15 @@
 const path = require('path')
 const webpack = require('webpack')
-//const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   watch: true,
   mode: 'development',
   performance: { hints: false },
   entry: {
-    app: ['@babel/polyfill',__dirname+'/src2/app.js'],
+
+    app: ['@babel/polyfill',__dirname+'/src2/js/app.js'],
     //scss: __dirname+'/src2/scss/main.scss',
     less: __dirname+'/src2/less/main.less'
   },
@@ -20,7 +21,13 @@ module.exports = {
     //publicPath: '/js/'
   },
   plugins: [
-    //new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [{
+        from: __dirname+'/src2/index.html',
+        to: __dirname+'/build2/index.html'
+      }]
+    }),
     new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 1, // disable creating additional chunks
     })
@@ -68,7 +75,6 @@ module.exports = {
   resolve: {
     alias: {
       vue: process.env.NODE_ENV === 'production'?'vue/dist/vue.esm.browser.min':'vue/dist/vue.esm.js',
-      'firebase/app': 'firebase/app/dist/index.cjs.js'
     },
     extensions: ['.js','.css','.scss','.less']
   }

@@ -3,6 +3,15 @@ A Thousand Worlds
 
 Based on https://github.com/nprapps/book-concierge
 
+V2.0
+----
+
+To start run
+
+#. install deps ``npm i``
+#. run dev version ``npm run monitor``
+#. visit http://localhost:4004
+
 Getting started
 ---------------
 

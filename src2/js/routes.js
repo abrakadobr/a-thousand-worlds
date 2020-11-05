@@ -2,85 +2,72 @@ import Pages from './pages/'
 
 export default [{
   path: '/',
-  name: 'dashboard',
+  name: 'home',
   components: {
-    default: Pages.Dashboard
+    default: Pages.Home
   },
-  meta: { access: ['client','realtor','root'] }
-  /*
+  //meta: { access: ['client','realtor','root'] }
 },{
-  path: '/create/user',
-  name: 'createuser',
+  path: '/curated',
+  name: 'curated',
   components: {
-    default: Pages.UserForm
+    default: Pages.Curated
   },
-  meta: { access: ['root'] }
+  //meta: { access: ['root'] }
 },{
-  path: '/user/:id',
-  name: 'updateuser',
+  path: '/people',
+  name: 'people',
   components: {
-    default: Pages.UserForm
+    default: Pages.People
   },
-  meta: { access: ['root'] }
+  //meta: { access: ['root'] }
 },{
-  path: '/users',
-  name: 'users',
+  path: '/donate',
+  name: 'donate',
   components: {
-    default: Pages.Users
+    default: Pages.Donate
   },
-  meta: { access: ['root'] }
+  //meta: { access: ['root'] }
 },{
-  path: '/apartments',
-  name: 'apartments',
+  path: '/about',
+  name: 'about',
   components: {
-    default: Pages.Apartments
+    default: Pages.About
   },
-  meta: { access: ['root','realtor'] }
-},{
-  path: '/apartment/:id',
-  name: 'updateapartment',
-  components: {
-    default: Pages.ApartmentForm
-  },
-  meta: { access: ['root','realtor'] }
-},{
-  path: '/create/apartment',
-  name: 'createapartment',
-  components: {
-    default: Pages.ApartmentForm
-  },
-  meta: { access: ['root','realtor'] }
-},{
-  path: '/register',
-  name: 'register',
-  components: {
-    default: Pages.Register
-  }
-},{
-  path: '/profile',
-  name: 'profile',
-  components: {
-    default: Pages.Profile
-  },
-  meta: { access: ['client','root','realtor'] }
+  //meta: { access: ['root'] }
 },{
   path: '/login',
   name: 'login',
   components: {
-    default: Pages.Login
-  }
+    default: Pages.LogIn
+  },
+  //meta: { access: ['root','realtor'] }
 },{
   path: '/logout',
   name: 'logout',
   components: {
-    default: Pages.Logout
-  }
+    default: Pages.LogOut
+  },
+  meta: { access: ['user.login'] }
+},{
+  path: '/account',
+  name: 'account',
+  components: {
+    default: Pages.Account
+  },
+  meta: { access: ['user.login'] }
+},{
+  path: '/submit-book',
+  name: 'submit-book',
+  components: {
+    default: Pages.SubmitBook
+  },
+  meta: { access: ['user.login'] }
 },{
   path: '*',
   name: '404',
   components: {
     default: Pages.NotFound
   }
-*/
 }]
 

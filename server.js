@@ -1,8 +1,8 @@
-
 const express = require('express')
 const webpack = require('webpack')
 
 const wpCfg = require('./webpack.config')
+
 //log.test('packing dashboard frontend')
 //console.log(wpCfg)
 webpack(wpCfg,(err,st)=>{
@@ -15,17 +15,14 @@ webpack(wpCfg,(err,st)=>{
   }
 })
 
-
 let app = express()
 
 app.use(express.static('./build2'))
 
-app.get('/',(req,res)=>{
-  res.sendFile('./build2/index.html')
+app.get('*',(req,res)=>{
+  res.sendFile('./build2/index.html',{root:'.'})
 })
 
 app.listen(4004,()=>{
   console.log('listen on 4004')
 })
-
-
